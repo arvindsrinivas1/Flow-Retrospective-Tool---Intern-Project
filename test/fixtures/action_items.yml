@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  emotion: MyString
+  sentiment: MyString
+
+two:
+  content: MyString
+  emotion: MyString
+  sentiment: MyString

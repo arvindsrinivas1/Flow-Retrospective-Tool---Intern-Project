@@ -1,0 +1,60 @@
+// Place all the styles related to the ActionItems controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+input[type=text] {
+
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+input[type=submit] {
+	background-color: #bdc3c7;
+    margin: 20px;
+    border-radius: 5px;
+
+}
+
+#heading {
+	text-align: center;
+    font-family: 'Megrim', cursive;
+}
+body{
+	background: linear-gradient(to right, #fff, #fff);
+}
+
+#new-cards-div {
+	float: left;
+	width: 50%;
+}
+#old-cards-div {
+	float: left;
+	width: 50%;
+}
+#all-cards-div {
+	background: #00CDAC;
+}
+.analysis {
+	  text-transform: capitalize;	  
+}
+.card {
+	margin-bottom: 10px;
+	border-radius: 25px;
+	padding: 5px 15px 20px 15px;
+	list-style-type: none;
+	box-shadow: 0 0 10px -1px rgba(0,0,0,0.2);
+}
+.sentiment {
+	float: left;
+	width: 50%;
+	text-align: center;
+	border-radius: 15px;
+	box-shadow: 0 0 10px -1px rgba(0,0,0,0.2);
+}
+.emotion {
+	float: right;
+	width: 50%;
+	border-radius: 15px;
+	text-align: center;
+	box-shadow: 0 0 10px -1px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1 id="heading">R E T R O S P E C T I V E</h1>
+
+<%= form_for @action_item do |f| %>
+  <%= f.text_field :content, :placeholder => "Speak your mind" %>
+  <%= f.submit "SHOUT" %>
+<% end %>  
+
+<div id="all-cards-div" >
+  <div id="new-cards-div">
+    </br>
+    <div id=heading style><b>N E W &nbsp; C A R D S</b></div>
+    <ul id="retro-cards-list">
+      <!-- Cards come here -->
+      <% @new_items.each do |item| %>
+      <div class=card>
+        <li><%=   item.content %></li></br>
+        <div class=analysis>
+          <div class="sentiment"><%= item.sentiment %></div>
+          <div class="emotion"><%= item.emotion %></div>
+        </div>
+      </div>
+      <% end %>
+      <!-- Cards come here -->
+    </ul>
+  </div>
+
+  <div id="old-cards-div">
+    </br>
+    <div id=heading><b>O L D &nbsp; C A R D S</b></div>
+    <% @old_items.each do |item| %>
+    <div class=card>
+      <li><%=    item.content %></li>
+      <div class=analysis>
+        <div class="sentiment"><%= item.sentiment %></div>
+        <div class="emotion"><%= item.emotion %></div>
+      </div>
+    </div>  
+    <% end %> 
+  </div>  
+</div>
+

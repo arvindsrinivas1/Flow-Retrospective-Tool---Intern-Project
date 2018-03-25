@@ -1,0 +1,2 @@
+PARALLEL_DOTS_KEY = Rails.application.secrets.parallel_dots_key
+set_api_key(PARALLEL_DOTS_KEY)
