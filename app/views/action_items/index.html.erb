@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1 id="heading">R E T R O S P E C T I V E</h1>
-
+<h2 id="heading">Hello, <%= @host_name %></h2>
 <%= form_for @action_item do |f| %>
-  <%= f.text_field :content, :placeholder => "Speak your mind" %>
+  <%= f.text_field :content, :placeholder => "Speak your mind", :required => 'required' %>
   <%= f.submit "SHOUT" %>
 <% end %>  
 

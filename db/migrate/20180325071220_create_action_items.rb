@@ -4,7 +4,7 @@ class CreateActionItems < ActiveRecord::Migration[5.1]
       t.string :content
       t.string :emotion
       t.string :sentiment
-
+      t.integer :user_id
       t.timestamps
     end
   end
