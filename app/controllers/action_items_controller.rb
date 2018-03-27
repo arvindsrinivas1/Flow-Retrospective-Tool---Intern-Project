@@ -4,11 +4,13 @@ class ActionItemsController < ApplicationController
   # GET /action_items
   # GET /action_items.json
 
+
+
+
   def index    
-    #user_id = User.find_by_name(@host_name).id
     action_item_arel = ActionItem.arel_table
-    @new_items = ActionItem.where(:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-    @old_items = ActionItem.where(action_item_arel[:created_at].lt Time.zone.now.beginning_of_day)
+    @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => @@user.id})
+    @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:user_id].eq(@@user.id)))
     @action_item = ActionItem.new
     #@action_items = ActionItem.all
   end
@@ -40,10 +42,7 @@ class ActionItemsController < ApplicationController
     end  
     
 
-    @action_item = ActionItem.new(action_item_params.merge(api_response_to_save)) #To save
-    puts ")))))))))))))))"
-    puts @user.inspect
-    puts "((((((((((((((("    
+    @action_item = ActionItem.new(action_item_params.merge(api_response_to_save)) #To save   
     @action_item.user_id = @@user.id
     #puts @action_item
     #puts @action_item.inspect
@@ -134,5 +133,4 @@ class ActionItemsController < ApplicationController
   def user_not_in_db?(user)
     user.nil?
   end
-    
 end
