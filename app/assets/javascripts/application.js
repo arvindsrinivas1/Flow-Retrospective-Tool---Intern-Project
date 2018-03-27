@@ -13,3 +13,32 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+var animation = "";
+
+var delayInMilliseconds = 1000;
+$(document).on("focus click", ".card", function(event){
+	elementID = this.id
+	rubberHandler(event,$("#"+elementID));
+});
+
+function rubberHandler(event, target){
+	console.log("WIGGLE WIGGLE");	
+	animation = "rubberBand";
+	$(document.body).css({"overflow-x":"hidden"});
+	target.addClass("animated");
+	target.addClass("rubberBand");
+	stopAnimation(animation,target);
+}
+
+
+
+//Stop animation(animation.css) after 1 sec 
+function stopAnimation(animation, target) {
+	setTimeout(function(){
+		target.removeClass("animated");
+		target.removeClass(animation);
+		$(document.body).css({"overflow-x":""});
+	},delayInMilliseconds); //rubberBand animation	
+
+}

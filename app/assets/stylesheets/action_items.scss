@@ -3,23 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-//keyframes//
-@keyframes vanishIn {
-  0% {
-    opacity: 0;
-    transform-origin: 50% 50%;
-    transform: scale(2, 2);
-    filter: blur(90px);
-  }
-
-  100% {
-    opacity: 1;
-    transform-origin: 50% 50%;
-    transform: scale(1, 1);
-    filter: blur(0px);
-  }
-}
-
 
 input[type=text] {
 	font-family: 'Syncopate', sans-serif;
@@ -28,15 +11,14 @@ input[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: width .5s ease;
+    -moz-transition: width .5s ease;
+    transition: width 0.5s ease;    
 }
 
 
 input[type=text]:focus {
 	width: 90%;
-
 }
 
 input[type=submit] {
@@ -51,9 +33,6 @@ input[type=submit] {
     font-family: 'Megrim', cursive;
 }
 
-#heading:hover {
-	animation: vanishIn;
-}
 body{
 	background: linear-gradient(to right, #fff, #fff);
 }
@@ -73,14 +52,13 @@ body{
 .analysis {
 	  text-transform: capitalize;	  
 }
-.card {
+.card{
 	margin-bottom: 10px;
 	border-radius: 25px;
 	padding: 5px 15px 20px 15px;
 	list-style-type: none;
 	box-shadow: 0 0 10px -1px rgba(0,0,0,0.2);
 }
-
 .sentiment {
 	float: left;
 	width: 50%;

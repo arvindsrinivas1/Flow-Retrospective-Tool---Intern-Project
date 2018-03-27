@@ -14,7 +14,7 @@
     <ul id="retro-cards-list">
       <!-- Cards come here -->
       <% @new_items.each do |item| %>
-      <div class=card>
+      <div class="card" , id=<%=item.id %>>
         <li><%=   item.content %></li></br>
         <div class=analysis>
           <div class="sentiment"><%= item.sentiment %></div>
@@ -30,7 +30,7 @@
     </br>
     <div id=heading><b>O L D &nbsp; C A R D S</b></div>
     <% @old_items.each do |item| %>
-    <div class=card>
+    <div class="card" , id=<%=item.id %>>
       <li><%=    item.content %></li>
       <div class=analysis>
         <div class="sentiment"><%= item.sentiment %></div>
