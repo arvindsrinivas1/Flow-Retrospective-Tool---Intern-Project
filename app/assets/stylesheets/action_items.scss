@@ -4,6 +4,35 @@
 
 
 
+.topnav{
+	 background-color: #333;
+}
+
+.topnav p{
+	float :left;
+	color: #f2f2f2;
+	font-size: 17px;
+}
+.topnav p:hover{
+	 background-color: #ddd;
+     color: black;	 
+}
+
+#love:hover{
+	color: red;
+}
+
+#love {
+	font-size :30px;
+	font-family: 'Just Another Hand', cursive;
+	text-align: center;
+	margin-top: 2%;
+	width: 100%;
+	float :left;
+	clear :left;
+	color: #ff9933;
+}
+
 input[type=text] {
 	font-family: 'Syncopate', sans-serif;
 	font-weight:bold;
@@ -47,7 +76,10 @@ body{
 }
 
 #all-cards-div {
-	background: #00CDAC;
+	margin-top: 2%;
+	width: 100%;
+	float:left;
+	
 }
 .analysis {
 	  text-transform: capitalize;	  

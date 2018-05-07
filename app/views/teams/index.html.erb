@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Teams</h1>
+YOU ARE A PART OF <%= @teams.count %> TEAMS <%= content_tag(:br) %>  
+<% @teams.each do |team|%>
+  <%= link_to(team.name, action_items_path(:team_name => team.name, :team_id => team.id))%>
+  <%= content_tag(:br) %>
+<% end %>  
+
+====================================================</br>
+

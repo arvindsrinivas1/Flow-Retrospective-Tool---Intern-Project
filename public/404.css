@@ -1,0 +1,32 @@
+.message {
+	transition: font-size .5s ease;
+	font-family: 'Tulpen One', cursive;
+	text-align: center;
+	margin-top: 20%;
+	color: #fff;
+}
+.message2{
+	transition: font-size .5s ease;
+	font-family: 'Tulpen One', cursive;
+	text-align: center;
+	margin-top: 5%;
+	color: black;
+}
+.message2:hover {
+	font-size: 50px;
+
+}
+
+body{
+
+	background-image: url("ursula.png");
+	background-blend-mode: lighten;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-height: 50%;
+}
+span {
+	color: black;
+}
+

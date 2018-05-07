@@ -5,8 +5,10 @@ class CreateActionItems < ActiveRecord::Migration[5.1]
       t.string :emotion
       t.string :sentiment
       t.integer :user_id
+      t.integer :team_id
       t.timestamps
     end
+    add_index("action_items","id")
   end
 
   def down

@@ -1,0 +1,1 @@
+$redis = Redis::Namespace.new("flow", :redis => Redis.new)

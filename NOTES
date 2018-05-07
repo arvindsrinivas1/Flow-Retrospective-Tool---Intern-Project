@@ -1,0 +1,2 @@
+NOTES:
+get_user checks if the user is already in the DB else creates the object

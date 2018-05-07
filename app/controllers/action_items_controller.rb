@@ -1,16 +1,29 @@
 class ActionItemsController < ApplicationController
+  include UserFindMethods
   before_action :set_action_item, only: [:show, :edit, :update, :destroy]
-  before_action :get_user, :only => [:index]
+  before_action :set_user_name
+  #before_action :get_user
+
+  #before_action :oxford_api_call, :only => [:index]
   # GET /action_items
   # GET /action_items.json
 
 
 
 
-  def index    
+  def index
+    @team_name = params[:team_name] 
+    session[:team_name] = @team_name unless @team_name.nil?
+    @team_id = params[:team_id]
+    session[:team_id] = @team_id unless @team_id.nil?
+    puts "@!31268378918236187"
+    puts session[:team_id]
+
+    get_stanford_response("Dave is lovely.",1000) 
+    puts "DONE WITH TESTTTTTTTTTTTTTTTTTTTTTTTTTTTt"
     action_item_arel = ActionItem.arel_table
-    @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => @@user.id})
-    @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:user_id].eq(@@user.id)))
+    @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => session[:user_id]})
+    @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:user_id].eq(session[:user_id])))
     @action_item = ActionItem.new
     #@action_items = ActionItem.all
   end
@@ -32,7 +45,9 @@ class ActionItemsController < ApplicationController
   # POST /action_items
   # POST /action_items.json
   def create
-    api_response = api_call(params[:action_item][:content])    
+    api_response = paralleldots_api_call(params[:action_item][:content])    
+    #oxford_response = oxford_api_call("mountain")
+
     api_response_to_save = api_response.select do |key,value|
       [:emotion, :sentiment].include?(key)
     end 
@@ -41,15 +56,21 @@ class ActionItemsController < ApplicationController
       [:emotion_probabilities, :sentiment_probabilities].include?(key)
     end  
     
+    @action_item = ActionItem.new(action_item_params.merge(api_response_to_save)) #To save
 
-    @action_item = ActionItem.new(action_item_params.merge(api_response_to_save)) #To save   
-    @action_item.user_id = @@user.id
+    #@action_item.user_id = session[:user_id]
+    user = User.find(session[:user_id].to_i)
+    puts "@!#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts session[:team_id]
+    team = Team.find(session[:team_id].to_i)
+    @action_item.user = user
+    @action_item.team = team
     #puts @action_item
     #puts @action_item.inspect
     #update_team_score
 
     respond_to do |format|
-      if @action_item.save
+      if @action_item.save()
         format.html { redirect_to action_items_path, notice: 'Action item was successfully created.' }
         format.json { render :show, status: :created, location: @action_item }
       else
@@ -97,7 +118,13 @@ class ActionItemsController < ApplicationController
     end
 
   #All shiz API
-  def api_call(content)
+  def paralleldots_api_call(content)
+    puts "MONEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+    content_ner = ner(content)
+    puts content_ner
+    content_keyword = keywords(content)
+    puts content_keyword
+    puts "MONEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
     content_emotion = emotion(content)
     content_sentiment = sentiment(content)
 
@@ -111,26 +138,52 @@ class ActionItemsController < ApplicationController
     }
 
     response
-  end 
+  end
 
   def update_team_score
     team = find_team_from_user_info
     team.update_score_and_save
   end  
 
+  def set_user_name
+    @host_name = session[:user_name]
+  end  
 
-  def get_user
-    client_ip = request.remote_ip
-    ping = `ping -a -n 1 #{client_ip}`
-    @host_name = ping[/Pinging (.*?).advisory.com/m,1]
-    @@user = User.find_by_name(@host_name)  #will be nil if user not already there, else user object.
-    if user_not_in_db?(@@user)
-      @@user = User.create({:name => @host_name})  
-    end  
-    puts @@user.inspect
-  end
 
-  def user_not_in_db?(user)
-    user.nil?
+#JUNK -------JUNK-------JUNK----------JUNK--------JUNK----JUNK-------JUNK-------JUNK---------
+=begin
+  def oxford_api_call(word_id,filter=nil)
+    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    language = 'en'
+    headers = {"app_id" => OXFORD_DICT_APP_ID, "app_key" => OXFORD_DICT_APP_KEY}
+    url = OXFORD_API_ENDPOINT + '/entries/' + language + '/' + word_id.downcase
+    response = HTTParty.get(url, :headers => headers, :verify => false)
+    puts "---------OXFORD RESPONSE----------------------------"
+    puts "RESPONSE BODY: #{response.body}"
+    puts "RESPONSE CODE: #{response.code}"
+    puts "RESPONSE MESSAGE: #{response.message}"
+    puts "RESPONSE HEADERS: #{response.headers.inspect}"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    response
+  end    
+  
+  def pos_tagger(content)
+    tagged = tgr.add_tags(content)
+    #ADJECTIVES
+    adjectives = tgr.get_adjectives(tagged)
+    superlative_adjectives = tgr.get_comparative_adjectives(tagged)
+    comparative_adjectives = tgr.get_superlative_adjectives(tagged)
+    #NOUNS
+    proper = tgr.get_proper_nouns(tagged)
+    nouns = tgr.get_nouns(tagged)
+    noun_phrases = tgr.get_noun_phrases(tagged)
+    max_noun_phrase = tgr.get_max_noun_phrases(tagged)
+    #ADVERBS
+    adverbs = tgr.get_adverbs(tagged)
+    
+    readable = tgr.get_readable(text)
   end
+#JUNK -------JUNK-------JUNK----------JUNK--------JUNK----JUNK-------JUNK-------JUNK---------
+=end
 end
+

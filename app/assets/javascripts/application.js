@@ -17,6 +17,7 @@
 var animation = "";
 
 var delayInMilliseconds = 1000;
+
 $(document).on("focus click", ".card", function(event){
 	elementID = this.id
 	rubberHandler(event,$("#"+elementID));
