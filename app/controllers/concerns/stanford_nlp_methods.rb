@@ -74,6 +74,10 @@ module StanfordNlpMethods
       puts action_item.response
       puts "*********************************************************************"
       score = {action_item.id.to_s.to_sym => calculate(full_response,action_item.response)}
+      puts "SCOOOOOOOREEEEEEE"
+      puts score
+      puts score.class
+      puts "EDDDDDDDDDDDDDDDD"
       scores << score
       #puts JSON.parse(action_item.response).to_h.to_class
     end  
@@ -83,6 +87,6 @@ module StanfordNlpMethods
     puts "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
     puts scores
     self.score = scores
-    #puts response   
+    puts response   
   end
 end

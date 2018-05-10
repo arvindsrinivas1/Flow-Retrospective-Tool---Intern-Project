@@ -1,9 +1,14 @@
 module TeamsHelper
 	def display_suggestions(item)
-		scores = item.scores.sort_by {|k, v| v }.reverse
+		display_content = [] 
+		scores = item.score.sort_by {|k, v| v }
+		puts scores
 		scores.each do |score|
-			puts ActionItem.find(score[0].id).content
-			puts ""
-		end	
+			display_content << ActionItem.find(score.keys.first.to_i).content
+		end
+		puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
+		puts display_content
+		puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^5"
+		display_content		
 	end	
 end

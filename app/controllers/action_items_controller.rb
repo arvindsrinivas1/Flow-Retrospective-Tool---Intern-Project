@@ -22,7 +22,7 @@ class ActionItemsController < ApplicationController
     #get_stanford_response("Dave is lovely.",1000) 
 
     action_item_arel = ActionItem.arel_table
-    @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => session[:user_id]})
+    @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => session[:user_id], :team_id => session[:team_id]})
     @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:team_id].eq(session[:team_id])))
     @action_item = ActionItem.new
     #@action_items = ActionItem.all

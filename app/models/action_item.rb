@@ -1,6 +1,6 @@
 class ActionItem < ApplicationRecord
   serialize :response, Hash
-  serialize :scores, Hash
+  serialize :score, Array
 
   include StanfordNlpMethods
   include Metric

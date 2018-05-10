@@ -18,7 +18,8 @@
       <ul id="retro-cards-list">
         <!-- Cards come here -->
         <% @new_items.each do |item| %>
-        <a data-toggle="popover" title="Suggestions" data-content=<% display_suggestions(item)%>>
+        <% puts "IN THE VIEWWWWWWWWWWWWWWWWW " %>
+        <a data-toggle="popover" title="Suggestions" data-content=<%= display_suggestions(item)%>>
           <div class="card" , id=<%=item.id %> >
             <li><%=   item.content %></li></br>
             <div class=analysis>
@@ -52,4 +53,3 @@
 <footer>
    <p id="love">Handcrafted  with <span id="heart">♡</span> by HP &nbsp; . &nbsp; Powered by Rails</p>
 </footer>
-<a data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
