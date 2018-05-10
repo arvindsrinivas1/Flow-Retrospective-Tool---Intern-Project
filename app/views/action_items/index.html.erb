@@ -9,6 +9,7 @@
   <%= f.submit "SHOUT" %>
   <%= content_tag(:br) %>
 <% end %>  
+
 <div id="stage">
   <div id="all-cards-div" >
     <div id="new-cards-div">
@@ -17,13 +18,15 @@
       <ul id="retro-cards-list">
         <!-- Cards come here -->
         <% @new_items.each do |item| %>
-        <div class="card" , id=<%=item.id %>>
-          <li><%=   item.content %></li></br>
-          <div class=analysis>
-            <div class="sentiment"><%= item.sentiment %></div>
-            <div class="emotion"><%= item.emotion %></div>
+        <a data-toggle="popover" title="Suggestions" data-content=<% display_suggestions(item)%>>
+          <div class="card" , id=<%=item.id %> >
+            <li><%=   item.content %></li></br>
+            <div class=analysis>
+              <div class="sentiment"><%= item.sentiment %></div>
+              <div class="emotion"><%= item.emotion %></div>
+            </div>
           </div>
-        </div>
+        </a>
         <% end %>
         <!-- Cards come here -->
       </ul>
@@ -49,3 +52,4 @@
 <footer>
    <p id="love">Handcrafted  with <span id="heart">♡</span> by HP &nbsp; . &nbsp; Powered by Rails</p>
 </footer>
+<a data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>

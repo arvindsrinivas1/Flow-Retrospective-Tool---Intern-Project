@@ -15,13 +15,17 @@
 //= require_tree .
 
 var animation = "";
-
 var delayInMilliseconds = 1000;
+
+$(document).ready(function(){	
+    $('[data-toggle="popover"]').popover();
+});
 
 $(document).on("focus click", ".card", function(event){
 	elementID = this.id
 	rubberHandler(event,$("#"+elementID));
 });
+
 
 function rubberHandler(event, target){
 	console.log("WIGGLE WIGGLE");	

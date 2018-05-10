@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180412093056) do
     t.string "sentiment"
     t.integer "user_id"
     t.integer "team_id"
+    t.text "response"
+    t.text "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_action_items_on_id"

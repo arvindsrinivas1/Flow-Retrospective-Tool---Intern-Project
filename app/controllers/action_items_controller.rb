@@ -1,7 +1,9 @@
 class ActionItemsController < ApplicationController
+
   include UserFindMethods
   before_action :set_action_item, only: [:show, :edit, :update, :destroy]
   before_action :set_user_name
+  
   #before_action :get_user
 
   #before_action :oxford_api_call, :only => [:index]
@@ -16,14 +18,12 @@ class ActionItemsController < ApplicationController
     session[:team_name] = @team_name unless @team_name.nil?
     @team_id = params[:team_id]
     session[:team_id] = @team_id unless @team_id.nil?
-    puts "@!31268378918236187"
-    puts session[:team_id]
 
-    get_stanford_response("Dave is lovely.",1000) 
-    puts "DONE WITH TESTTTTTTTTTTTTTTTTTTTTTTTTTTTt"
+    #get_stanford_response("Dave is lovely.",1000) 
+
     action_item_arel = ActionItem.arel_table
     @new_items = ActionItem.where({:created_at => Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, :user_id => session[:user_id]})
-    @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:user_id].eq(session[:user_id])))
+    @old_items = ActionItem.where((action_item_arel[:created_at].lt(Time.zone.now.beginning_of_day)).and(action_item_arel[:team_id].eq(session[:team_id])))
     @action_item = ActionItem.new
     #@action_items = ActionItem.all
   end
@@ -60,9 +60,8 @@ class ActionItemsController < ApplicationController
 
     #@action_item.user_id = session[:user_id]
     user = User.find(session[:user_id].to_i)
-    puts "@!#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts session[:team_id]
     team = Team.find(session[:team_id].to_i)
+
     @action_item.user = user
     @action_item.team = team
     #puts @action_item
@@ -148,6 +147,7 @@ class ActionItemsController < ApplicationController
   def set_user_name
     @host_name = session[:user_name]
   end  
+
 
 
 #JUNK -------JUNK-------JUNK----------JUNK--------JUNK----JUNK-------JUNK-------JUNK---------

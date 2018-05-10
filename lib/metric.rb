@@ -12,7 +12,6 @@ module Metric
 			hypernym_response = {}
 			hypernym_response[:h_subj] = []
 			hypernym_response[:h_obj] = []
-            hypernym_response[:pos] = {}
 			hypernym_response[:h_ner] = response[:ner]	
 			response[:sub].each do |subb|; hypernym_response[:h_subj] << subb.split('/')[0]; end 
 			response[:obj].each do |ob|; hypernym_response[:h_obj] << ob.split('/')[0]; end 
@@ -20,9 +19,9 @@ module Metric
 			hypernym_response[:h_obj] = hypernym_response[:h_obj] - remove_list
 			
 			response[:pos].keys.each do |pos|
-				hypernym_response[:pos]["h_pos_#{pos}".to_sym] = response[:pos][pos] unless pos=='.'
-			    hypernym_response[:pos]["h_pos_#{pos}".to_sym] = add_pos_hypernym(hypernym_response[:pos]["h_pos_#{pos}".to_sym],pos) unless pos=="."
-                hypernym_response[:pos]["h_pos_#{pos}".to_sym] -= remove_list
+				hypernym_response["h_pos_#{pos}".to_sym] = response[:pos][pos] unless pos=='.'
+			    hypernym_response["h_pos_#{pos}".to_sym] = add_pos_hypernym(hypernym_response["h_pos_#{pos}".to_sym],pos) unless pos=="."
+                hypernym_response["h_pos_#{pos}".to_sym] -= remove_list
 			end
 
 			hypernym_response[:h_subj] = add_subj_hypernym(hypernym_response[:h_subj]) - remove_list

@@ -63,9 +63,9 @@ class ApplicationController < ActionController::Base
     #puts Dinosaurus.lookup('Chicago')
     #puts Dinosaurus.similar_to('bad')
     #get_features(response,action_item_id)    
-    r1 = {:id=>999, :hypernym_responses=>[{:h_subj=>["Aravind","river"], :h_obj=>[], :h_ner=>{:PERSON=>["Aravind"],:LOCATION =>["Chicago"]}, :h_pos_noun=>["Aravind"], :h_pos_verb=>["is"], :h_pos_adjective=>["lovely", "adorable", "endearing"]}]}
-    r2 = {:id=>1000, :hypernym_responses=>[{:h_subj=>["Dave","river"], :h_obj=>[], :h_ner=>{:PERSON=>["Dave"],:LOCATION =>["Chicago"]}, :h_pos_noun=>["Dave"], :h_pos_verb=>["is"], :h_pos_adjective=>["lovely", "adorable", "endearing"]}]}
-    calculate(r1,r2)
+    #r1 = {:id=>999, :hypernym_responses=>[{:h_subj=>["Aravind","river"], :h_obj=>[], :h_ner=>{:PERSON=>["Aravind"],:LOCATION =>["Chicago"]}, :h_pos_noun=>["Aravind"], :h_pos_verb=>["is"], :h_pos_adjective=>["lovely", "adorable", "endearing"]}]}
+    #r2 = {:id=>1000, :hypernym_responses=>[{:h_subj=>["Dave","river"], :h_obj=>[], :h_ner=>{:PERSON=>["Dave"],:LOCATION =>["Chicago"]}, :h_pos_noun=>["Dave"], :h_pos_verb=>["is"], :h_pos_adjective=>["lovely", "adorable", "endearing"]}]}
+    #calculate(r1,r2)
     #puts Dinosaurus.synonyms_of('building')        
     puts "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
     #puts response   

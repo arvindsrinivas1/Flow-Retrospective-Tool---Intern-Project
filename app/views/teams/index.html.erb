@@ -8,4 +8,13 @@ YOU ARE A PART OF <%= @teams.count %> TEAMS <%= content_tag(:br) %>
 <% end %>  
 
 ====================================================</br>
+<!--Add data [For dev purposes]:
+
+<%= form_for @user, :url => '/teams', :method => :post do |f| %>
+	<%= f.fields_for :teams do |ff| %>
+		<%= ff.text_field :name, :placeholder => "Team name", :required => 'required' %>
+	<% end %>
+	<%= f.submit "Enter" %>
+<% end %>
+-->
 

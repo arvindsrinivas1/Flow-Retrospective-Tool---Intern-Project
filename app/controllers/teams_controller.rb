@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     @teams ||= @user.teams
+    @team = Team.new
   end
 
   # GET /teams/1
@@ -25,6 +26,8 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
+    puts "CCCXXXXXXXXXXXXXXXXXXXXXXXXOOOOOOOOOOOOOOOOO"
+    puts params
     @team = Team.new(team_params)
 
     respond_to do |format|
@@ -71,6 +74,7 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :emotion, :sentiment)
+      #params.require(:user).require(:team).permit(:name)
     end
 
     def get_user
@@ -82,7 +86,7 @@ class TeamsController < ApplicationController
         @host_name = ping[/Pinging (.*?)-/m,1]
         @user = User.find_by_name(@host_name)  #will be nil if user not already there, else user object.
         if user_not_in_db?(@user)
-          puts "OBJECT CREATED -----------------------------"
+          puts "Creating object -----------------------------"
           @user = User.create({:name => @host_name})  
         end  
         puts "SETTING SESSION DATA--------------------------"
